@@ -1,33 +1,32 @@
 <script lang="ts">
-import _ from 'lodash';
-import { lexer, compile} from './utils/brainfuck';
+import { newMemory, compile, isValid, lexer } from './utils/brainfuck';
+import Editor from './lib/Editor.svelte';
+import MemDump from './lib/MemDump.svelte';
 
-
-console.info(lexer('>+++---, i am batman'));
-
-// let x = `>++++++++[<+++++++++>-]<.>++++[<+++++++>-]
-// <+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.
-// >++++++[<+++++++++>-]<+.<.+++.------.--------.>>>
-// ++++[<++++++++>-]<+.`;
-let x = 'content here';
-// let x = '++++++[>+++++++++++<-]>-.'
-$: tokens = lexer(x);
-let memory = {
-        pos: 0,
-        stack: new Uint8Array(30, () => 0)
-    };
-
-$: out = compile(memory)(tokens);
+let x = '';
+$: out = compile(newMemory())(lexer(x));
 console.info(out);
-
 </script>
 
-building the brainfuck compiler
+<header>
+ the online brainfuck compiler
+</header>
 
+<main>
+    <textarea bind:value={x} placeholder="put content"/>
+    <br/>
+    <div>
+        { out }
+    </div>
 
-<input type="text" bind:value={x}/>
+    <Editor/>
+    <MemDump/>
+</main>
 
-<br/>
-received {x}
-<br/>
-resolved { out }
+<style>
+    div {
+            display: block;
+            background-color: #8DB38B;
+            color: white;
+        }
+</style>

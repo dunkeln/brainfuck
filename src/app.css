@@ -1,0 +1,28 @@
+
+
+@font-face {
+    font-family: berkeley;
+    src: url('./font.ttf');
+}
+
+body {
+    font-family: berkeley;
+    overflow: hidden;
+}
+
+header {
+    position: relative;
+    padding: 1rem;
+    color: white;
+    background-color: #bc4749;
+}
+
+.component {
+    border-radius: .4rem;
+    padding: 1em;
+}
+
+.bfk {
+    text: red;
+}
+
